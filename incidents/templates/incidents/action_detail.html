@@ -6,16 +6,16 @@
 {% if action.created_by == user or save_button_type == 'Create Action' %}
   <div class="container-sub-heading">
     <h1>Action</h1>
-    <button class="btn btn-secondary float-end" type="button" onclick="window.location='{% url 'actions' incident_id %}'">Back to Actions</button>
+    <button class="btn btn-secondary float-end" type="button" onclick="window.location='{% url 'actions' incident_id %}'" aria-label="Back to actions">Back to Actions</button>
   </div>
   <form method="post">
   {{ action_form | crispy}}
   {% csrf_token %}
   <div class="combined-buttons">
-    <button class="btn btn-success" type="submit">{{ save_button_type }}</button>
+    <button class="btn btn-success" type="submit" aria-label="{{ save_button_type }}">{{ save_button_type }}</button>
     {% if save_button_type == 'Update' %}
-    <button type="button" class="btn btn-danger" onclick="window.location='{% url 'action_delete' incident_id action.id %}'">Delete</button>
-    <button type="button" class="btn btn-info" onclick="window.location='{% url 'photos' incident_id action.id %}'">Photos</button>
+    <button type="button" class="btn btn-danger" onclick="window.location='{% url 'action_delete' incident_id action.id %}'" aria-label="Delete">Delete</button>
+    <button type="button" class="btn btn-info" onclick="window.location='{% url 'photos' incident_id action.id %}'" aria-label="Photos">Photos</button>
     {% endif %}
   </div>
   </form>

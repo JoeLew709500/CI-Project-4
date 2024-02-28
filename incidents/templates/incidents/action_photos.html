@@ -6,7 +6,7 @@
 {% if action_user == user %}
     <div class="container-sub-heading">
         <h1>Action Photos</h1>
-        <button class="btn btn-secondary float-end" type="button" onclick="window.location='{% url 'action_detail' incident_id action_id %}'">Back to Action Detail</button>
+        <button class="btn btn-secondary float-end" type="button" onclick="window.location='{% url 'action_detail' incident_id action_id %}'" aria-label="Back to action detail">Back to Action Detail</button>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -16,7 +16,7 @@
             <form method="post" enctype="multipart/form-data">
                 {{ photo_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="btn btn-primary" aria-label="Upload photo">Upload</button>
             </form>
             </div>
         </div>
@@ -32,9 +32,9 @@
                 {% for action_photo in photo_list %}
                 <div class="col-md-4">
                 <div class="card mt-2">
-                    <img src="{{ action_photo.photo.url }}" class="card-img-top" alt="">
+                    <img src="{{ action_photo.photo.url }}" class="card-img-top" alt="Uploaded Photo">
                     <div class="card-body">
-                    <button onclick="window.location='{% url 'photo_delete' incident_id action_id action_photo.id %}'" class="btn btn-danger">Delete</button>
+                    <button aria-label="Delete Photo" onclick="window.location='{% url 'photo_delete' incident_id action_id action_photo.id %}'" class="btn btn-danger">Delete</button>
                     </div>
                 </div>
                 </div>
