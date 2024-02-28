@@ -1,12 +1,20 @@
-from django.shortcuts import render,reverse, get_object_or_404
-from django.http import HttpResponseRedirect
-from django.contrib import messages
 from cloudinary import api as cloudinaryAPI
 from cloudinary import exceptions as cloudinaryexceptions
-from .models import Incident, Action, ActionPhoto
-from .forms import IncidentForm, ActionForm, ActionFormNew, IncidentFormSearch, PhotoForm
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, reverse
+
+from .forms import (
+    ActionForm,
+    ActionFormNew,
+    IncidentForm,
+    IncidentFormSearch,
+    PhotoForm,
+)
+from .models import Action, ActionPhoto, Incident
 
 # Create your views here.
+
 
 def index(request):
     """
@@ -19,8 +27,9 @@ def index(request):
 
     return render(
         request,
-        'incidents/index.html',
+        "incidents/index.html",
     )
+
 
 def incident_list(request):
     """
@@ -28,14 +37,14 @@ def incident_list(request):
     View to display a list of incidents
 
     ## Templates: incidents/incident_list.html
-    
+
     """
     if request.method == "POST":
         incident_form = IncidentFormSearch(data=request.POST)
         if incident_form.is_valid():
-            selected_category = incident_form.cleaned_data.get('incident_category')
-            selected_date = incident_form.cleaned_data.get('date')
-            if selected_category != '0':
+            selected_category = incident_form.cleaned_data.get("incident_category")
+            selected_date = incident_form.cleaned_data.get("date")
+            if selected_category != "0":
                 incidents = Incident.objects.filter(incident_category=selected_category)
             else:
                 incidents = Incident.objects.all()
@@ -49,12 +58,13 @@ def incident_list(request):
 
     return render(
         request,
-        'incidents/incident_list.html',
+        "incidents/incident_list.html",
         {
             "incident_list": incidents,
             "incident_form": incident_form,
         },
     )
+
 
 def incident_detail(request, incident_id):
     """
@@ -70,27 +80,29 @@ def incident_detail(request, incident_id):
         incident_form = IncidentForm(data=request.POST, instance=incident)
         if incident_form.is_valid():
             incident_form.save()
-            messages.add_message(request, messages.SUCCESS, 'Incident updated')
+            messages.add_message(request, messages.SUCCESS, "Incident updated")
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating incident')
+            messages.add_message(request, messages.ERROR, "Error updating incident")
 
-        return HttpResponseRedirect(reverse('incident_detail', args=(incident_id,)))
+        return HttpResponseRedirect(reverse("incident_detail", args=(incident_id,)))
 
     else:
 
-    # display/edit individual incidents
+        # display/edit individual incidents
         incident_form = IncidentForm(
             instance=get_object_or_404(Incident, pk=incident_id)
         )
         return render(
             request,
-            'incidents/incident.html',
+            "incidents/incident.html",
             {
                 "incident": Incident.objects.get(id=incident_id),
                 "incident_form": incident_form,
                 "save_button_type": "Update",
             },
         )
+
+
 def incident_new(request):
     """
 
@@ -106,21 +118,22 @@ def incident_new(request):
             incident = incident_form.save(commit=False)
             incident.created_by = request.user
             incident.save()
-            messages.add_message(request, messages.SUCCESS, 'Incident created')
-            return HttpResponseRedirect(reverse('incident_detail', args=(incident.id,)))
+            messages.add_message(request, messages.SUCCESS, "Incident created")
+            return HttpResponseRedirect(reverse("incident_detail", args=(incident.id,)))
         else:
-            messages.add_message(request, messages.ERROR, 'Error creating incident')
+            messages.add_message(request, messages.ERROR, "Error creating incident")
     else:
         incident_form = IncidentForm()
 
     return render(
         request,
-        'incidents/incident.html',
+        "incidents/incident.html",
         {
             "incident_form": incident_form,
             "save_button_type": "Create Incident",
         },
     )
+
 
 def incident_delete(request, incident_id):
     """
@@ -133,8 +146,9 @@ def incident_delete(request, incident_id):
 
     incident = get_object_or_404(Incident, pk=incident_id)
     incident.delete()
-    messages.add_message(request, messages.SUCCESS, 'Incident deleted')
-    return HttpResponseRedirect(reverse('incident_list'))
+    messages.add_message(request, messages.SUCCESS, "Incident deleted")
+    return HttpResponseRedirect(reverse("incident_list"))
+
 
 def actions(request, incident_id):
     """
@@ -149,7 +163,7 @@ def actions(request, incident_id):
 
     return render(
         request,
-        'incidents/actions.html',
+        "incidents/actions.html",
         {
             "action_list": Action.objects.filter(incident_id=incident_id),
             "incident_id": incident_id,
@@ -157,7 +171,8 @@ def actions(request, incident_id):
         },
     )
 
-def action_detail(request,incident_id, action_id):
+
+def action_detail(request, incident_id, action_id):
     """
 
     View to display the details of an individual action
@@ -170,21 +185,27 @@ def action_detail(request,incident_id, action_id):
         action_form = ActionForm(data=request.POST, instance=action)
         if action_form.is_valid():
             action_form.save()
-            messages.add_message(request, messages.SUCCESS, 'Action updated')
+            messages.add_message(request, messages.SUCCESS, "Action updated")
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating action')
+            messages.add_message(request, messages.ERROR, "Error updating action")
 
-        return HttpResponseRedirect(reverse('action_detail', args=(incident_id,action_id,)))
+        return HttpResponseRedirect(
+            reverse(
+                "action_detail",
+                args=(
+                    incident_id,
+                    action_id,
+                ),
+            )
+        )
 
     else:
 
-        action_form = ActionForm(
-            instance=get_object_or_404(Action, pk=action_id)
-        )
+        action_form = ActionForm(instance=get_object_or_404(Action, pk=action_id))
 
         return render(
             request,
-            'incidents/action_detail.html',
+            "incidents/action_detail.html",
             {
                 "action": Action.objects.get(id=action_id),
                 "action_form": action_form,
@@ -192,6 +213,7 @@ def action_detail(request,incident_id, action_id):
                 "incident_id": incident_id,
             },
         )
+
 
 def action_new(request, incident_id):
     """
@@ -209,21 +231,23 @@ def action_new(request, incident_id):
             action.created_by = request.user
             action.incident = Incident.objects.get(id=incident_id)
             action.save()
-            messages.add_message(request, messages.SUCCESS, 'Action created')
-            return HttpResponseRedirect(reverse('actions', args=(incident_id,)))
+            messages.add_message(request, messages.SUCCESS, "Action created")
+            return HttpResponseRedirect(reverse("actions", args=(incident_id,)))
         else:
-            messages.add_message(request, messages.ERROR, 'Error creating action')
+            messages.add_message(request, messages.ERROR, "Error creating action")
     else:
         action_form = ActionFormNew()
 
     return render(
         request,
-        'incidents/action_detail.html',
+        "incidents/action_detail.html",
         {
             "incident_id": incident_id,
             "action_form": action_form,
             "save_button_type": "Create Action",
-        },)
+        },
+    )
+
 
 def action_delete(request, incident_id, action_id):
     """
@@ -234,8 +258,9 @@ def action_delete(request, incident_id, action_id):
 
     action = get_object_or_404(Action, pk=action_id)
     action.delete()
-    messages.add_message(request, messages.SUCCESS, 'Action deleted')
-    return HttpResponseRedirect(reverse('actions', args=(incident_id,)))
+    messages.add_message(request, messages.SUCCESS, "Action deleted")
+    return HttpResponseRedirect(reverse("actions", args=(incident_id,)))
+
 
 def photos(request, incident_id, action_id):
     """
@@ -249,15 +274,16 @@ def photos(request, incident_id, action_id):
 
     get_object_or_404(Action, pk=action_id)
 
-
     # Tests if cloudinary is available
     try:
         cloudinaryAPI.ping()
-        messages.add_message(request, messages.SUCCESS,
-                             'Cloudinary the cloud service is available')
+        messages.add_message(
+            request, messages.SUCCESS, "Cloudinary the cloud service is available"
+        )
     except cloudinaryexceptions.Error:
-        messages.add_message(request, messages.ERROR,
-                             'Cloudinary the cloud service is not available')
+        messages.add_message(
+            request, messages.ERROR, "Cloudinary the cloud service is not available"
+        )
 
     action_user = Action.objects.get(id=action_id).created_by
 
@@ -267,15 +293,15 @@ def photos(request, incident_id, action_id):
             photo = photo_form.save(commit=False)
             photo.action_id = Action.objects.get(id=action_id)
             photo.save()
-            messages.add_message(request, messages.SUCCESS, 'Photo added')
+            messages.add_message(request, messages.SUCCESS, "Photo added")
         else:
-            messages.add_message(request, messages.ERROR, 'Error adding photo')
+            messages.add_message(request, messages.ERROR, "Error adding photo")
     else:
         photo_form = PhotoForm()
 
     return render(
         request,
-        'incidents/action_photos.html',
+        "incidents/action_photos.html",
         {
             "photo_list": ActionPhoto.objects.filter(action_id=action_id),
             "incident_id": incident_id,
@@ -284,6 +310,7 @@ def photos(request, incident_id, action_id):
             "photo_form": photo_form,
         },
     )
+
 
 def photo_delete(request, incident_id, action_id, photo_id):
     """
@@ -294,5 +321,13 @@ def photo_delete(request, incident_id, action_id, photo_id):
 
     photo = get_object_or_404(ActionPhoto, pk=photo_id)
     photo.delete()
-    messages.add_message(request, messages.SUCCESS, 'Photo deleted')
-    return HttpResponseRedirect(reverse('photos', args=(incident_id, action_id,)))
+    messages.add_message(request, messages.SUCCESS, "Photo deleted")
+    return HttpResponseRedirect(
+        reverse(
+            "photos",
+            args=(
+                incident_id,
+                action_id,
+            ),
+        )
+    )
