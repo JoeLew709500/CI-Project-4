@@ -191,9 +191,41 @@ See project plan [here](https://github.com/users/JoeLew709500/projects/3)
 
 ### Automated
 
+#### Form Tests
+
+#### View Tests
+
 [Back to table](#table-of-contents)
 
 ### Manual
+
+#### HTML
+The [W3C Markup Validator](https://validator.w3.org/) was used to validate the HTML of the project in order to ensure there were no syntax errors.
+
+W3C Markup Validator found the following errors concerning base.html.
+
+
+#### CSS
+[W3C CSS Validator](https://jigsaw.w3.org/css-validator/) was used to validate the CSS of the project in order to ensure there were no syntax errors. 
+
+W3C CSS Validator found no errors or warnings on my CSS.
+
+![CSS Validation](assets/readme-files/css.png)
+
+#### JavaScript
+[JSHint](https://jshint.com/) was used to validate the JavaScript of the project in order to ensure there were no syntax errors. 
+
+JShint found no errors or warnings on my JavaScript.
+
+![JavaScript Validation](assets/readme-files/jshint.png)
+
+#### Python
+Pylint, PyLance and Black in VScode was used throughout the development process
+
+In the below results the only errors showing for PEP8 is missing docstrings for the importing of libaries
+
+![PEP8](assets/readme-files/PEP8-1.png)
+![PEP8](assets/readme-files/PEP8-2.png)
 
 [Back to table](#table-of-contents)
 
