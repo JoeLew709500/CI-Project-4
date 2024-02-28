@@ -56,6 +56,10 @@ The database diagram was written in [dbdiagram](https://dbdiagram.io/). The data
 
 ### Wireframes
 
+The below wire frames were created in [Miro](https://miro.com/)
+
+![Wireframes](assets/wireframe/wireframes.png)
+
 ### User Stories & Project Plan
 
 See project plan [here](https://github.com/users/JoeLew709500/projects/3)
