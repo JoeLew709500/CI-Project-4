@@ -44,7 +44,7 @@ class TestActionForm(TestCase):
     Test Action Form
     """
 
-    def set_up(self):
+    def setUp(self):
         """
         Set up user and incident
         """

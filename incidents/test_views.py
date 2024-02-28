@@ -10,7 +10,7 @@ class TestIncidentViews(TestCase):
     Test the views for the incidents app
     """
 
-    def set_up(self):
+    def setUp(self):
         """
         Set up user,incident and action
         """
