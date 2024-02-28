@@ -191,9 +191,8 @@ See project plan [here](https://github.com/users/JoeLew709500/projects/3)
 
 ### Automated
 
-#### Form Tests
-
-#### View Tests
+* I implemented automated testing for the Django views & forms please see the results below
+![Automated testing results](assets/readme-files/automated-tests.png)
 
 [Back to table](#table-of-contents)
 
@@ -202,7 +201,9 @@ See project plan [here](https://github.com/users/JoeLew709500/projects/3)
 #### HTML
 The [W3C Markup Validator](https://validator.w3.org/) was used to validate the HTML of the project in order to ensure there were no syntax errors.
 
-W3C Markup Validator found the following errors concerning base.html.
+W3C Markup Validator found the following errors concerning base.html
+
+![W3C Markup Validator](assets/readme-files/html.png)
 
 
 #### CSS
