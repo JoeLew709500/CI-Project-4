@@ -9,11 +9,12 @@ Visit the deployed website [here](https://project-4-artic-case-manager-0cfe222fc
 ## Table of Contents
 
 1. [User Experience](#user-experience)
+    * [User Stories & Projects](#user-stories--project)
 2. [Features](#features)
 3. [Technologies Used](#technologies-used)
 4. [Testing](#testing)
-    1. [Automated](#automated)
-    2. [Manual](#manual)
+    * [Automated](#automated)
+    * [Manual](#manual)
 5. [Deployment](#deployment)
 6. [Product](#product)
 7. [Credits](#credits)
@@ -53,6 +54,8 @@ Visit the deployed website [here](https://project-4-artic-case-manager-0cfe222fc
 **Stage 15**
 ![Stage 15](assets/project-timelines/stage15.png)
 
+[Back to table](#table-of-contents)
+
 ## Features
 
 ## Technologies Used
@@ -63,6 +66,8 @@ Visit the deployed website [here](https://project-4-artic-case-manager-0cfe222fc
 * JavaScript
 * Python
 
+[Back to table](#table-of-contents)
+
 ### Frameworks, Libraries and Packages
 * Django
 * allauth
@@ -72,16 +77,24 @@ Visit the deployed website [here](https://project-4-artic-case-manager-0cfe222fc
 * Cloudinary
 * Gunicorn
 
+[Back to table](#table-of-contents)
+
 ### Other
 * ElephantSQL
 * Heroku
 * favicon.io
 
+[Back to table](#table-of-contents)
+
 ## Testing
 
 ### Automated
 
+[Back to table](#table-of-contents)
+
 ### Manual
+
+[Back to table](#table-of-contents)
 
 ## Deployment
 This project was developed using Visual Studio Code
@@ -105,6 +118,8 @@ To deploy this repository via Heroku follow the below steps
     1. Go to the Deploy tab and select your cloned repository for deployment
     2. Scroll down to the bottom and deploy from the main branch
 
+[Back to table](#table-of-contents)
+
 
 ## Product
 
@@ -120,5 +135,9 @@ Page | Laptop | Mobile |
 | Login | - | - |
 | Logout | - | - |
 
+[Back to table](#table-of-contents)
+
 ## Credits
 * Pop-up messages was taken from [Code Institute's](https://codeinstitute.net/) django-blog project.
+
+[Back to table](#table-of-contents)
